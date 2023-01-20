@@ -26,7 +26,7 @@ class CleansingServices(AppServiceProject):
                 response = StreamingResponse(iter([stream.getvalue()]),
                                              media_type="text/csv"
                                              )
-                response.headers["Content-Disposition"] = "attachment; filename=export.csv"
+                response.headers["Content-Disposition"] = "attachment; filename=data_cleansing.csv"
 
                 return response
         except Exception as e:

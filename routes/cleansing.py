@@ -3,6 +3,7 @@ from fastapi import File, UploadFile
 from io import StringIO
 import pandas as pd
 from services.cleansing import CleansingServices
+import sqlite3
 
 router = APIRouter()
 
@@ -19,7 +20,6 @@ async def cleansing_tweets_text(
 async def cleansing_tweets_file(
     file: UploadFile = File(...)
 ):
-    data = pd.read_csv(
-        StringIO(str(file.file.read(), 'latin-1')), encoding='latin-1')
+    data = pd.read_csv(StringIO(str(file.file.read(), 'latin-1')), encoding='latin-1')
     result = await CleansingServices().cleansing(type="file", text=data)
     return result

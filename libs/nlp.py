@@ -18,13 +18,18 @@ def lowercase(text):
 
 
 def remove_unnecessary_char(text):
-    text = re.sub('\n', ' ', text)  # Remove every '\n'
-    text = re.sub('rt', ' ', text)  # Remove every retweet symbol
-    text = re.sub('user', ' ', text)  # Remove every username
-    # Remove every URL
-    text = re.sub(
-        '((www\.[^\s]+)|(https?://[^\s]+)|(http?://[^\s]+))', ' ', text)
-    text = re.sub('  +', ' ', text)  # Remove extra spaces
+    text = re.sub('\n',' ',text) # Remove every '\n'
+    text = re.sub('rt',' ',text) # Remove every retweet symbol
+    text = re.sub('user',' ',text) # Remove every username
+    text = re.sub('((www\.[^\s]+)|(https?://[^\s]+)|(http?://[^\s]+))',' ',text) # Remove every URL
+    text = re.sub('  +', ' ', text) # Remove extra spaces
+    text = re.sub(r"(@\[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|^rt|http.+?", "", text) # Remove unicode characters
+    text = re.sub(r'pic.twitter.com.[\w]+', '', text)  # Remove every pic
+    text = re.sub("#[A-Za-z0-9_]+","", text) # Remove hastag & mention
+    text = re.sub("\$", "", text)  # Remove market ticker
+    text = re.sub('gue', 'saya', text)  # replace gue - saya
+    text = re.sub(r':', '', text) #Remove symbol 
+    text = re.sub(r'‚Ä¶', '', text) #Remove symbol Ä¶
     return text
 
 
