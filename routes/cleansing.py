@@ -8,6 +8,11 @@ import sqlite3
 router = APIRouter()
 
 
+def connect_db():
+    conn = sqlite3.connect("db/tugas.db")
+    print("Connecting to database")
+    return conn
+
 @router.get("/cleansing-text")
 async def cleansing_tweets_text(
     text: str
@@ -23,3 +28,4 @@ async def cleansing_tweets_file(
     data = pd.read_csv(StringIO(str(file.file.read(), 'latin-1')), encoding='latin-1')
     result = await CleansingServices().cleansing(type="file", text=data)
     return result
+
